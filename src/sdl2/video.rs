@@ -1489,7 +1489,7 @@ impl Window {
     #[doc(alias = "SDL_GetWindowICCProfile")]
     pub fn icc_profile(&self) -> Result<Vec<u8>, String> {
         unsafe {
-            let mut size: sys::size_t = 0;
+            let mut size: usize = 0;
             let data = sys::SDL_GetWindowICCProfile(self.context.raw, &mut size as *mut _);
             if data.is_null() {
                 return Err(get_error());

@@ -436,6 +436,7 @@ impl DisplayEvent {
             }
             sys::SDL_DisplayEventID::SDL_DISPLAYEVENT_CONNECTED => DisplayEvent::Connected,
             sys::SDL_DisplayEventID::SDL_DISPLAYEVENT_DISCONNECTED => DisplayEvent::Disconnected,
+            sys::SDL_DisplayEventID::SDL_DISPLAYEVENT_MOVED => DisplayEvent::None
         }
     }
 
@@ -1216,6 +1217,8 @@ impl Event {
                     direction: direction.to_ll(),
                     preciseX: precise_x,
                     preciseY: precise_y,
+                    mouseX: precise_x as i32,
+                    mouseY: precise_y as i32
                 };
                 unsafe {
                     ptr::copy(&event, ret.as_mut_ptr() as *mut sys::SDL_MouseWheelEvent, 1);
